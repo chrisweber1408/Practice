@@ -1,26 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import UserDetails from "./pages/UserDetails";
 
-function App() {
+export default function App() {
+    return(
+        <BrowserRouter>
+            <Routes>
+                <Route path={"/"} element={<LoginPage/>}/>
+                <Route path={"/register"} element={<RegisterPage/>}/>
+                <Route path={"/userdetails"} element={<UserDetails/>}/>
+            </Routes>
+        </BrowserRouter>
+    )
 
-    const [greeting, setGreeting] = useState('')
-
-    useEffect(() => {
-        fetch('/api/greeting', {
-            method: 'GET',
-            headers: {
-                'Accept': 'text/plain'
-            }
-        })
-            .then(response => response.text())
-            .then(text => setGreeting(text))
-            .catch(err => setGreeting('Da ist etwas schief gelaufen'));
-    }, []);
-
-    return (
-        <div>
-            {greeting}
-        </div>
-    );
 }
-
-export default App;
